@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const accountRoutes = require('./routes/accountRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // Initialize Express app
 const app = express();
@@ -16,11 +16,11 @@ mongoose.connect('mongodb+srv://gideontetteh792:CjkLE3grbCxUCWGL@cluster0.tzlhh.
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log('Connected to MongoDB'))
+.then(() => console.log('Connected to MongoDB Atlas'))
 .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api', accountRoutes);
+app.use('/api', userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -44,4 +44,6 @@ app.use((req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-}); 
+});
+
+module.exports = app; // Export app for testing 
